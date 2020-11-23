@@ -16,6 +16,7 @@
                     <div>
                         <p>Temperature : 20°C</p>
                         <p>Temps: Nuageux</p>
+                        
                     </div>
                 </div>
             </div>
@@ -29,11 +30,12 @@
                 <div class="date-time-infos">
                     <h2 class="current-city">London</h2>
                     <div>
-                        <p class="current-date">Monday, 9 September 2020</p>
+                        <p class="current-date">{{currentDate}}</p>
                     </div>
                 </div>
-                <div>
-                    <p>Storm</p>
+                <div class="current-weather">
+                    <img class="icon-current-weather" src="../assets/weather-pack-icon/001-storm-12.png" alt="">
+                    <p class="text-current-weather">Storm</p>
                 </div>
                 
             </div>
@@ -42,6 +44,8 @@
 </template>
 
 <script>
+
+import axios from 'axios';
 
 var today = new Date(); 
 	var year = today.getFullYear(); // retourne le millésime
@@ -52,11 +56,34 @@ var today = new Date();
 	var arr_day=new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
 
 const currentDate = arr_day[dayOfTheWeek] + ', ' + day + ' ' + arr_month[month] + ' ' + year ; 
-console.log(currentDate, today);
+// console.log(currentDate, today);
         
 
 export default {
-    name: 'Weather'
+    name: 'Weather',
+    data(){
+        return {
+            currentDate: currentDate,
+            requete: '',
+            weather: undefined,
+            api_code: '625ff0820b405788a4e383dacc79095a',
+            url_recherche: 'https://api.openweathermap.org/data/2.5/weather?'
+        }
+    },
+    methods: {
+        goWeather(event){
+            if(event.key == "Enter"){
+                axios.get(`${this.url_recherche}q=${this.requete}&units=metric&APPID=${this.api_code}`)
+                .then(reponse => {
+                    console.log(reponse);
+                    this.weather=reponse.data
+                })
+                .finally(
+                    this.requete=''
+                )
+            }
+        }
+    }
 }
 
 </script>

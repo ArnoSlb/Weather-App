@@ -14,16 +14,18 @@ body {
     height: 100vh;
     background-color: rgba(255,255, 255, 30%);
     backdrop-filter: blur(13px);
-    padding: 3em;
+    padding: 0 3em;
     
 }
 
 .title-infos {
     position: absolute;
     left: 8%;
-    bottom: 2%;
-    width: 40vw;
+    bottom: 13%;
     display: flex;
+    /* background-color: rgba(255,255, 255, 30%); */
+    padding: 0 30px;
+
     
 }
 
@@ -33,17 +35,18 @@ body {
 
 .temperature-logo {
     font-size: 40px;
-    margin-top: 100px;
+    margin: 0;
 }
 
 .title-temperature {
     font-size: 120px;
+    margin: 0;
 }
 
 .date-city-icon {
     display: flex;
     margin-left: 30px;
-    margin-top: 120px;
+    align-self: center;
 }
 
 .current-city {
@@ -52,6 +55,19 @@ body {
 }
 
 .current-date {
+    margin: 0;
+}
+
+.current-weather {
+    margin-left: 30px;
+    margin-top: 19px;
+}
+
+.icon-current-weather {
+    width: 50px;
+}
+
+.text-current-weather {
     margin: 0;
 }
 
