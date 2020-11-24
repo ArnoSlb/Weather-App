@@ -2,7 +2,7 @@
 
 We want to create a Weather App with Vue.Js and Openweathermap API.
 The final result should look like this:
-![](weather-app.png)
+![](weather-app.jpg)
 
 ## Project setup
 ```
