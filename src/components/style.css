@@ -4,7 +4,6 @@ body {
     background-position: bottom center;
     font-family: 'Poppins', sans-serif;
     margin: 0;
-
 }
 
 .container {
@@ -15,7 +14,6 @@ body {
     background-color: rgba(255,255, 255, 30%);
     backdrop-filter: blur(9px);
     padding: 0 3em;
-    
 }
 
 .title-infos {
@@ -25,8 +23,6 @@ body {
     display: flex;
     /* background-color: rgba(255,255, 255, 30%); */
     padding: 0 30px;
-
-    
 }
 
 .temperature {
