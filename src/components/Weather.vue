@@ -1,100 +1,132 @@
+
 <template>
-    <div class="weather"> 
-        <div class="container">
-            <h1>Station Météo</h1>
-            <div>
-            <label for="position">Chercher une ville </label>
-            <input 
-                id="position" 
-                type="text"
-                class="searching-city"
-                v-model="requete"
-                v-on:keypress="goWeather"
-            >
+    <div>
+        <div class="loader-background" v-if="loading">
+            <div class="loader">
+                <h1 class="loader-title">Chargement</h1>
+                <div class="inner one"></div>
+                <div class="inner two"></div>
+                <div class="inner three"></div>
+            </div>
+        </div>
+        <div v-else class="weather"> 
+            <div class="container">
+                <h1>Station Météo</h1>
                 <div>
-                    <h3>Détails de la météo pour {{weather.name}}</h3>
-                    <h4 class="weather-description">{{weather.weather[0].description}}</h4>
-                    <h4 class="categories">Les températures</h4>
-                    <div class="details-temp-box">
-                        <div class="details-infos-box">
-                            <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
-                            <p class="details-text">min</p>
-                            <p class="thermometer-number">{{weather.main.temp_min.toFixed()}} °C</p>
-                        </div>
-                        <div class="details-infos-box">
-                            <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
-                            <p class="thermometer-number">{{weather.main.temp.toFixed()}} °C</p>
-                        </div> 
-                        <div class="details-infos-box">
-                            <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
-                            <p class="details-text">ressentis</p>
-                            <p class="thermometer-number">{{weather.main.feels_like.toFixed()}} °C</p>
-                        </div>  
-                        <div class="details-infos-box">
-                            <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
-                            <p class="details-text">max</p>
-                            <p class="thermometer-number">{{weather.main.temp_max.toFixed()}} °C</p>
-                        </div>   
-                    </div>
-                    <h4 class="categories">Anémométrie</h4>
-                    <div class="details-temp-box">  
-                        <div class="details-infos-box">
-                            <img class="humidity-icon" src="../assets/weather-pack-icon/humidity.png" alt="">
-                            <p class="details-text">humidité</p>
-                            <p class="thermometer-number">{{weather.main.humidity.toFixed()}} %</p>
-                        </div>   
-                        <div class="details-infos-box">
-                            <img class="thermometer-icon" src="../assets/weather-pack-icon/027-wind-sign.png" alt="">
-                            <p class="details-text">vitesse</p>
-                            <p class="thermometer-number">{{weather.wind.speed}} km/h</p>
-                        </div>   
-                        <div class="details-infos-box">
-                            <img class="thermometer-icon" src="../assets/weather-pack-icon/barometer.png" alt="">
-                            <p class="details-text">pression</p>
-                            <p class="thermometer-number">{{weather.main.pressure.toFixed()}} hPa</p>
-                        </div> 
-                    </div>
-                    <h4 class="categories">Aurore et Crépuscule</h4>
-                    <div class="details-sunrise-box">  
-                        <div class="details-infos-box">
-                            <img class="humidity-icon" src="../assets/weather-pack-icon/sunrise.png" alt="">
-                            <p class="details-text">levée (heure française)</p>
-                            <p class="thermometer-number">{{sunrise}}</p>
-                        </div>   
-                        <div class="details-infos-box">
-                            <img class="thermometer-icon" src="../assets/weather-pack-icon/sunset.png" alt="">
-                            <p class="details-text">couchée (heure française)</p>
-                            <p class="thermometer-number">{{sunset}}</p>
-                        </div>   
-                    </div>
-                </div>
-            </div>
-        </div> 
-        <div class="title-infos">
-            <div class="temperature">
-                <h1 class="title-temperature">{{weather.main.temp.toFixed()}}</h1>
-                <p class="temperature-logo">°</p>
-            </div>
-            <div class="date-city-icon">
-                <div class="date-time-infos">
-                    <h2 class="current-city">{{weather.name}}</h2>
+                <label for="position">Chercher une ville </label>
+                <input 
+                    id="position" 
+                    type="text"
+                    class="searching-city"
+                    v-model="requete"
+                    v-on:keypress="handler"
+                >
                     <div>
-                        <p class="current-date">{{currentDate}}</p>
+                        <h3>Détails de la météo pour {{weather.name}}</h3>
+                        <div class="data-scroll">
+                            <h4 class="weather-description">{{weather.weather[0].description}}</h4>
+                        <h4 class="categories">Les températures</h4>
+                        <div class="details-temp-box">
+                            <div class="details-infos-box">
+                                <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
+                                <p class="details-text">min</p>
+                                <p class="thermometer-number">{{weather.main.temp_min.toFixed()}} °C</p>
+                            </div>
+                            <div class="details-infos-box">
+                                <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
+                                <p class="thermometer-number">{{weather.main.temp.toFixed()}} °C</p>
+                            </div> 
+                            <div class="details-infos-box">
+                                <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
+                                <p class="details-text">ressentis</p>
+                                <p class="thermometer-number">{{weather.main.feels_like.toFixed()}} °C</p>
+                            </div>  
+                            <div class="details-infos-box">
+                                <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
+                                <p class="details-text">max</p>
+                                <p class="thermometer-number">{{weather.main.temp_max.toFixed()}} °C</p>
+                            </div>   
+                        </div>
+                        <h4 class="categories">Anémométrie</h4>
+                        <div class="details-temp-box">  
+                            <div class="details-infos-box">
+                                <img class="humidity-icon" src="../assets/weather-pack-icon/humidity.png" alt="">
+                                <p class="details-text">humidité</p>
+                                <p class="thermometer-number">{{weather.main.humidity.toFixed()}} %</p>
+                            </div>   
+                            <div class="details-infos-box">
+                                <img class="thermometer-icon" src="../assets/weather-pack-icon/027-wind-sign.png" alt="">
+                                <p class="details-text">vitesse</p>
+                                <p class="thermometer-number">{{weather.wind.speed}} km/h</p>
+                            </div>   
+                            <div class="details-infos-box">
+                                <img class="thermometer-icon" src="../assets/weather-pack-icon/barometer.png" alt="">
+                                <p class="details-text">pression</p>
+                                <p class="thermometer-number">{{weather.main.pressure.toFixed()}} hPa</p>
+                            </div> 
+                        </div>
+                        <h4 class="categories">Aurore et Crépuscule</h4>
+                        <div class="details-sunrise-box">  
+                            <div class="details-infos-box">
+                                <img class="humidity-icon" src="../assets/weather-pack-icon/sunrise.png" alt="">
+                                <p class="details-text">levée (heure française)</p>
+                                <p class="thermometer-number">{{sunrise}}</p>
+                            </div>   
+                            <div class="details-infos-box">
+                                <img class="thermometer-icon" src="../assets/weather-pack-icon/sunset.png" alt="">
+                                <p class="details-text">couchée (heure française)</p>
+                                <p class="thermometer-number">{{sunset}}</p>
+                            </div>   
+                        </div>
+                        <h4 class="categories">La météo des prochaines 24h par intervalles de 3h</h4>
+                        <table class="table-week">
+                            <tr class="table-categories">
+                                <td>Heure</td>
+                                <td>Météo</td>
+                                <td>Température</td>
+                                <td>Humidité</td>
+                                <td>Vent</td>      
+                            </tr>   
+                            <tr v-for="hour in weatherByDay" :key="hour.dt_txt" class="table-data">
+                                <td class="table-data">{{hour.dt_txt}}</td>
+                                <td class="table-data">{{hour.weather[0].description}}</td>
+                                <td class="table-data">{{hour.main.temp.toFixed() - 273}} °C</td>
+                                <td class="table-data">{{hour.main.humidity}} %</td>
+                                <td class="table-data">{{hour.wind.speed}} km/h</td>      
+                            </tr>  
+                        </table>
+                        </div>     
                     </div>
                 </div>
-                <!-- <div class="current-weather">
-                    <img class="icon-current-weather" id="wicon" v-bind:src="iconUrl" alt="Weather icon">
-                    <p class="text-current-weather">{{weather.weather[0].description}}</p>
-                </div> -->
-                
+            </div> 
+            <div class="title-infos">
+                <div class="temperature">
+                    <h1 class="title-temperature">{{weather.main.temp.toFixed()}}</h1>
+                    <p class="temperature-logo">°</p>
+                </div>
+                <div class="date-city-icon">
+                    <div class="date-time-infos">
+                        <h2 class="current-city">{{weather.name}}</h2>
+                        <div>
+                            <p class="current-date">{{currentDate}}</p>
+                        </div>
+                    </div>
+                    <!-- <div class="current-weather">
+                        <img class="icon-current-weather" id="wicon" v-bind:src="iconUrl" alt="Weather icon">
+                        <p class="text-current-weather">{{weather.weather[0].description}}</p>
+                    </div> -->
+                    
+                </div>
             </div>
         </div>
     </div>
+    
 </template>
 
 <script>
 
 import axios from 'axios';
+
 
 var today = new Date(); 
 	var year = today.getFullYear(); // retourne le millésime
@@ -104,7 +136,7 @@ var today = new Date();
 	var dayOfTheWeek = today.getDay() ; // retourne un entier compris entre 0 et 6 (0 pour dimanche)
 	var arr_day=new Array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
 
-const currentDate = arr_day[dayOfTheWeek] + ', ' + day + ' ' + arr_month[month] + ' ' + year ; 
+const currentDate = arr_day[dayOfTheWeek] + ' ' + day + ' ' + arr_month[month] + ' ' + year ; 
 
 
 // let sunriseConvertion = new Date(sunriseUnix*1000)
@@ -151,25 +183,42 @@ export default {
             sunrise: '',
             sunsetUnix: 0,
             sunset:'',
+            loading: true,
+            weatherByDay: '',
             
         }
     },
-    created() {
-        axios.get(`${this.url_recherche}q=nantes&units=metric&APPID=${this.api_code}&lang=fr`)
-        .then(reponse => {
-                    // console.log(reponse);
-                    this.weather=reponse.data;
-                    this.iconCode=reponse.data.weather[0].main;
-                    this.sunriseUnix= new Date(reponse.data.sys.sunrise*1000);
-                    this.sunrise=this.sunriseUnix.getHours() + 'h' + this.sunriseUnix.getMinutes();
-                    this.sunsetUnix= new Date(reponse.data.sys.sunset*1000);
-                    this.sunset=this.sunsetUnix.getHours() + 'h' + this.sunsetUnix.getMinutes();
-                })
-                .finally(
-                    this.requete='',
-                )
+    beforeMount() {
+        this.goWeatherNantes();
+        this.goWeatherNantesDay();
     },
     methods: {
+        goWeatherNantes() {
+            axios.get(`${this.url_recherche}q=nantes&units=metric&APPID=${this.api_code}&lang=fr`)
+            .then(reponse => {
+                        // console.log(reponse);
+                        this.weather=reponse.data;
+                        this.iconCode=reponse.data.weather[0].main;
+                        this.sunriseUnix= new Date(reponse.data.sys.sunrise*1000);
+                        this.sunrise=this.sunriseUnix.getHours() + 'h' + this.sunriseUnix.getMinutes();
+                        this.sunsetUnix= new Date(reponse.data.sys.sunset*1000);
+                        this.sunset=this.sunsetUnix.getHours() + 'h' + this.sunsetUnix.getMinutes();
+                    })
+                    .finally(
+                        this.requete='',
+                        this.loading=false,
+                    )
+        },
+        goWeatherNantesDay() {
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=nantes&appid=${this.api_code}&lang=fr&cnt=9`)
+            .then(reponse => {
+                console.log(reponse);
+                this.weatherByDay=reponse.data.list;
+            })
+            .finally(
+
+            )
+        },
         goWeather(event){
             if(event.key == "Enter"){
                 axios.get(`${this.url_recherche}q=${this.requete}&units=metric&APPID=${this.api_code}&lang=fr`)
@@ -182,6 +231,18 @@ export default {
                     this.sunset=this.sunsetUnix.getHours() + 'h' + this.sunsetUnix.getMinutes();
                 })
                 .finally(
+                    // this.requete=''
+                )
+            }
+        },
+        goWeatherDay(event) {
+            if(event.key == "Enter"){
+                axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${this.requete}&appid=${this.api_code}&lang=fr&cnt=9`)
+                .then(reponse => {
+                    console.log(reponse);
+                    this.weatherByDay=reponse.data.list;
+                })
+                .finally(
                     this.requete=''
                 )
             }
@@ -190,9 +251,13 @@ export default {
             let sunriseConvertion = new Date(unix*1000);
             let sunrise = sunriseConvertion.getHours() + 'h' + sunriseConvertion.getMinutes();
             return(sunrise);
+        },
+        handler(event){
+            this.goWeather(event);
+            this.goWeatherDay(event);
         }
 
-    } 
+    }
 }
 
 </script>
