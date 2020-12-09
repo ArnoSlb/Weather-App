@@ -25,7 +25,6 @@ body {
     left: 4%;
     bottom: 10%;
     display: flex;
-    /* background-color: rgba(255,255, 255, 30%); */
     padding: 0 30px;
 }
 
@@ -101,7 +100,17 @@ h3 {
     display: flex;
 }
 
+.details-sunrise-infos-box {
+    display: flex;
+}
+
 .details-temp-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.details-anenometrie-box {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -135,18 +144,22 @@ h3 {
     margin-top: 5px;
 }
 
-@media (min-aspect-ratio: 3/2) {
-    body {
-        background-size: 100vw auto;
-    }
+.table-week {
+    width: 100%;
 }
 
-@media (max-width: 1450px) {
-    .title-infos {
-        background-color: rgba(255,255, 255, 30%);
-        backdrop-filter: blur(9px);
-        padding: 0 3em;
-    }
+.table-categories {
+    background: black;
+    color: white;
+    text-align: center;
+}
+
+.table-data {
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .loader-background {
@@ -231,21 +244,139 @@ h3 {
     }
   }
 
-.table-week {
-    width: 100%;
+
+
+@media (min-aspect-ratio: 3/2) {
+    body {
+        background-size: 100vw auto;
+    }
 }
 
-.table-categories {
-    background: black;
-    color: white;
-    text-align: center;
+@media (max-width: 1450px) {
+    .title-infos {
+        background-color: rgba(255,255, 255, 30%);
+        backdrop-filter: blur(9px);
+        padding: 0 3em;
+    }
 }
 
-.table-data {
-    text-align: center;
-    border-bottom: 1px solid black;
-    padding: 0;
-    padding-top: 5px;
-    padding-bottom: 5px;
+@media (max-width: 1350px) {
+    .container {
+        width: 50vw;
+    }
 }
 
+@media (max-width: 1150px) {
+
+    body {
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+
+    }
+
+    .title-infos {
+        top: 50px;
+        height: 120px;
+        width: 80vw;
+        left: calc(50% - 47vw);
+        font-size: 12px;
+        backdrop-filter: none;
+        background-color: transparent;
+        flex-direction: column-reverse;
+    }
+
+    .date-city-icon {
+        margin: 0 auto;
+    }
+
+    .current-date {
+        text-align: center;
+    }
+
+    .current-city {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .temperature {
+        justify-content: center;
+    }
+
+    .temperature-logo {
+        margin: 0;
+    }
+
+    .title-temperature {
+        font-size: 50px;
+    }
+
+
+
+    .container {
+        width: 80vw;
+        height: 93vh;
+        left: calc(50% - 44.5vw);
+        top: 180px;
+        padding: 20px;
+    }
+    
+    h3 {
+        margin: 0;
+        font-size: 15px;
+        text-align: center;
+    }
+    .title-app {
+        display: none;
+    }
+
+    #position {
+        width: 80%;
+    }
+
+    .position-text-search {
+        display: inline-block;
+        text-align: center;
+        margin: 0 25%;
+    }
+
+    .data-scroll {
+        height: 80vh;
+    }
+
+    .details-temp-box {
+        flex-wrap: wrap;
+    }
+
+    #temp-min {
+        order:2;
+    }
+
+    #temp-max {
+        order:4;
+        margin-right: 22px;
+    }
+
+    .details-anenometrie-box {
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+    }
+
+    .details-sunrise-box {
+        flex-direction: column; 
+    }
+
+    .details-sunrise-infos-box {
+        justify-content: space-evenly;
+    }
+
+    .table-week {
+        padding-bottom: 20px;
+    }
+
+    .table-categories-categorie{
+        padding: 0 7px;
+    }
+
+}
