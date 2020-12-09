@@ -243,6 +243,8 @@ h3 {
 
 .table-data {
     text-align: center;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     padding: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
