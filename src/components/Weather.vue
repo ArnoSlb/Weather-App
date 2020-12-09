@@ -210,7 +210,7 @@ export default {
                     )
         },
         goWeatherNantesDay() {
-            axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=nantes&appid=${this.api_code}&lang=fr&cnt=9`)
+            axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=nantes&appid=${this.api_code}&lang=fr&cnt=9`)
             .then(reponse => {
                 console.log(reponse);
                 this.weatherByDay=reponse.data.list;
@@ -237,7 +237,7 @@ export default {
         },
         goWeatherDay(event) {
             if(event.key == "Enter"){
-                axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${this.requete}&appid=${this.api_code}&lang=fr&cnt=9`)
+                axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${this.requete}&appid=${this.api_code}&lang=fr&cnt=9`)
                 .then(reponse => {
                     console.log(reponse);
                     this.weatherByDay=reponse.data.list;
