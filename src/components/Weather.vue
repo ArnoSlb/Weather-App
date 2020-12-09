@@ -11,9 +11,9 @@
         </div>
         <div v-else class="weather"> 
             <div class="container">
-                <h1>Station Météo</h1>
+                <h1 class="title-app">Station Météo</h1>
                 <div>
-                <label for="position">Chercher une ville </label>
+                <label class="position-text-search" for="position">Chercher une ville </label>
                 <input 
                     id="position" 
                     type="text"
@@ -27,28 +27,28 @@
                             <h4 class="weather-description">{{weather.weather[0].description}}</h4>
                         <h4 class="categories">Les températures</h4>
                         <div class="details-temp-box">
-                            <div class="details-infos-box">
+                            <div class="details-infos-box" id="temp-min">
                                 <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
                                 <p class="details-text">min</p>
                                 <p class="thermometer-number">{{weather.main.temp_min.toFixed()}} °C</p>
                             </div>
-                            <div class="details-infos-box">
+                            <div class="details-infos-box" id="temp">
                                 <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
                                 <p class="thermometer-number">{{weather.main.temp.toFixed()}} °C</p>
                             </div> 
-                            <div class="details-infos-box">
+                            <div class="details-infos-box" id="temp-feel">
                                 <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
                                 <p class="details-text">ressentis</p>
                                 <p class="thermometer-number">{{weather.main.feels_like.toFixed()}} °C</p>
                             </div>  
-                            <div class="details-infos-box">
+                            <div class="details-infos-box" id="temp-max">
                                 <img class="thermometer-icon" src="../assets/weather-pack-icon/024-thermometer-5.png" alt="">
                                 <p class="details-text">max</p>
                                 <p class="thermometer-number">{{weather.main.temp_max.toFixed()}} °C</p>
                             </div>   
                         </div>
                         <h4 class="categories">Anémométrie</h4>
-                        <div class="details-temp-box">  
+                        <div class="details-anenometrie-box">  
                             <div class="details-infos-box">
                                 <img class="humidity-icon" src="../assets/weather-pack-icon/humidity.png" alt="">
                                 <p class="details-text">humidité</p>
@@ -67,12 +67,12 @@
                         </div>
                         <h4 class="categories">Aurore et Crépuscule</h4>
                         <div class="details-sunrise-box">  
-                            <div class="details-infos-box">
+                            <div class="details-sunrise-infos-box">
                                 <img class="humidity-icon" src="../assets/weather-pack-icon/sunrise.png" alt="">
                                 <p class="details-text">levée (heure française)</p>
                                 <p class="thermometer-number">{{sunrise}}</p>
                             </div>   
-                            <div class="details-infos-box">
+                            <div class="details-sunrise-infos-box">
                                 <img class="thermometer-icon" src="../assets/weather-pack-icon/sunset.png" alt="">
                                 <p class="details-text">couchée (heure française)</p>
                                 <p class="thermometer-number">{{sunset}}</p>
@@ -81,11 +81,11 @@
                         <h4 class="categories">La météo des prochaines 24h par intervalles de 3h</h4>
                         <table class="table-week">
                             <tr class="table-categories">
-                                <td>Heure</td>
-                                <td>Météo</td>
-                                <td>Température</td>
-                                <td>Humidité</td>
-                                <td>Vent</td>      
+                                <td class="table-categories-categorie">Heure</td>
+                                <td class="table-categories-categorie">Météo</td>
+                                <td class="table-categories-categorie">Température</td>
+                                <td class="table-categories-categorie">Humidité</td>
+                                <td class="table-categories-categorie">Vent</td>      
                             </tr>   
                             <tr v-for="hour in weatherByDay" :key="hour.dt_txt" class="table-data">
                                 <td class="table-data">{{hour.dt_txt}}</td>
